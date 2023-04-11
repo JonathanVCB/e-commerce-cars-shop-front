@@ -1,23 +1,39 @@
-import LiCar from "./style"
-import {MdAttachMoney} from "react-icons/md"
+import LiCar from "./style";
+import { MdAttachMoney } from "react-icons/md";
 
 const CarCard = ({}) => {
+  return (
+    <LiCar>
+      <div className="container-image">
+        <img src="src\assets\imgCardCar\carImg.svg" alt="Imagem do carro" />
 
-    return(
+        <span>Ativo</span>
 
-        <LiCar>
+        <span>
+          <MdAttachMoney className="money-icon" />
+        </span>
+      </div>
 
-            <div className="container-image">
-                <img src="src\assets\imgCardCar\carImg.svg" alt="Imagem do carro" />
+      <section className="container-information">
+        <h3>Product title stays here - max 1 line</h3>
 
-                <span>
-                    Ativo
-                </span>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque itaque
+          consequuntur sint libero molestiae in voluptates velit explicabo. Vel
+          consequatur est exercitationem tempora deserunt possimus voluptatibus
+          quidem! Illo, voluptas debitis.
+        </p>
+      </section>
 
-                <span>
-                    <MdAttachMoney className="money-icon"/>
-                </span>
-
+      <section className="container-plusInfromation">
+        <div className="plusInformation-containerUser">
+          <div>
+            <div className="user-container">
+              <img
+                src="src\assets\imgCardCar\user.svg"
+                alt="imagem do usuário"
+              />
+              <span>Usuário</span>
             </div>
 
             <section className="container-information">
@@ -56,6 +72,6 @@ const CarCard = ({}) => {
 
     )
 
-}
+};
 
-export default CarCard
+export default CarCard;

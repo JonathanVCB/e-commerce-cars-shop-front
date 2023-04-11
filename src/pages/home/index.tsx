@@ -11,6 +11,7 @@ import { ContainerHomePage, HomePanel, NumberPage, UlCardCars } from "./style";
 import CarCard from "../../components/cards/car/car";
 import ModalFilterMobile from "../../components/modals/home/filterCarsMobile.modal";
 import FilterCars from "../../components/modals/home/filterCars.modal";
+import { Input } from "../../components/form/input";
 
 export const Home = () => {
 
