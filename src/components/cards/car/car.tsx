@@ -22,7 +22,7 @@ const CarCard = ({}) => {
 
             <section className="container-information">
 
-                <h3>Product title stays here - max 1 line</h3>
+                <h3>Product title stays here - max 1 lineeeeeeeeee</h3>
 
                 <p>
                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque itaque consequuntur sint libero molestiae in voluptates velit explicabo. Vel consequatur est exercitationem tempora deserunt possimus voluptatibus quidem! Illo, voluptas debitis.

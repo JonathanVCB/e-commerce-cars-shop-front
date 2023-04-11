@@ -54,6 +54,10 @@ const LiCar = styled.li`
         h3{
             font-weight: 600;
             padding-top: 20px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 95%;
         }
 
         p{
@@ -129,6 +133,7 @@ const LiCar = styled.li`
         }
 
     }
+
 
 `
 
