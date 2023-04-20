@@ -14,7 +14,7 @@ import { useState, ReactNode } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export const Input = ({
-  error = null,
+  errorMessage,
   icon: Icon,
   label,
   variant,
@@ -23,6 +23,7 @@ export const Input = ({
   id,
   type,
   formWidth,
+  marginTopForm,
   showPass,
   ...rest
 }: InputProps) => {
@@ -61,7 +62,7 @@ export const Input = ({
   };
 
   return (
-    <FormControl mt={5} width={formWidth}>
+    <FormControl mt={marginTopForm} width={formWidth}>
       {!!label && <FormLabel fontSize="0.875rem">{label}</FormLabel>}
 
       <InputGroup flexDirection={"column"}>
@@ -82,28 +83,28 @@ export const Input = ({
             onChange(e);
           }}
           bg={"transparent"}
-          paddingBottom={{ base: "80px", xsm2: "25px" }}
           border={"1px solid"}
-          borderColor={{ base: "grey.7", xsm2: "transparent" }}
+          borderColor={"grey.7"}
+          borderRadius={"4px"}
           variant={variant}
           _hover={{
             bg: "grey.8",
             borderColor: "transparent",
           }}
           _placeholder={{ color: "grey.3" }}
-          size={"lg"}
+          size={"md"}
           h={height}
           maxH={{ base: 128, xsm2: 75 }}
-          _focus={{ borderColor: { base: "brand.2", xsm2: "transparent", }, backgroundColor: "grey.10" }}
-          _focusVisible={{
-            borderColor: { base: "brand.2", xsm2: "transparent" },
+          _focus={{
+            borderColor: "brand.2",
+            backgroundColor: "grey.10",
           }}
           {...rest}
         ></ChakraInput>
         {showPass === true && (
           <InputRightElement>{showPassword({ showPass })}</InputRightElement>
         )}
-        {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+        {!!errorMessage && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
       </InputGroup>
     </FormControl>
   );
