@@ -1,37 +1,72 @@
 import { Box, Button, FormControl, FormLabel, Heading, Text, Textarea } from "@chakra-ui/react"
-import { Form } from "./style"
-import { useState } from "react"
-import {Input} from "../input"
-import { useForm } from "react-hook-form"
+import { FormRegister } from "./style"
+import { useState, useContext } from "react"
 import { yupResolver } from "@hookform/resolvers/yup"
-import formSchema from "../../../schemas/comments"
-import { iComment } from "../../../@types"
+import { contextRegexInputs } from "../../../context/regexInputs.context"
+import schemaRegister from "../../../schemas/register.schema"
+import { useForm } from "react-hook-form"
+import { error } from "console"
+import { iRegister } from "../../../interface/user.interface"
+import {Input} from "../input"
 
 const FormRegisterUser = () => {
 
     const [isSaler, setIsSaler] = useState<boolean>(false)
 
     const {
+        formattedBirthdate, 
+        formattedCpf, 
+        formattedMobileNumber, 
+        formattedZipcode,
+        birthdate,
+        cpf,
+        cellphoneNumber,
+        cep
+    } = useContext(contextRegexInputs)
+
+    const {
         register,
         handleSubmit,
         formState: { errors },
-      } = useForm<iComment>({
-        resolver: yupResolver(formSchema),
-    });
+      } = useForm<iRegister>({
+            resolver: yupResolver(schemaRegister),
+        });
+    
+    const onSubmitRegister = (data: iRegister) => {
+
+        const objUser = {
+            name: data.name,
+            email: data.email,
+            telephone: data.telephone,
+            password: data.password,
+            cpf: data.cpf,
+            image_url: "https://encurtador.com.br/dmwCE",
+            birthdate: data.birthdate,
+            street: data.street,
+            zipcode: data.zipcode,
+            state: data.state,
+            city: data.city,
+            number: data.number,
+            complement: data.complement,
+            isSaler: isSaler
+        }
+
+        console.log(objUser)
+
+    } 
 
     return (
-        <Form>
-            <Box w="80%" margin="0 auto">
+        <FormRegister onSubmit={handleSubmit(onSubmitRegister)}>
+            <Box w="80%" margin="0 auto" as="section">
 
-                <Box paddingTop="45px">
+                <Box paddingTop="45px" as="div">
                     <Heading as="h2" fontSize="1.6rem" fontWeight="500">Cadastro</Heading>
                 </Box>
-                <Box paddingTop="25px" mb="25px">
+                <Box paddingTop="25px" mb="25px" as="div">
                     <Heading as="h3" fontSize="1rem" fontWeight="500">Infomações pessoais</Heading>
                 </Box>
-                <Box width="100%%" margin="0 auto">
+                <Box width="100%%" margin="0 auto" as="div">
                     <Input
-
                         id="name"
                         placeholder="Ex: Samuel Leão"
                         color="grey.3"
@@ -44,7 +79,11 @@ const FormRegisterUser = () => {
                         pt="15px"
                         pb="15px"
                         label="Nome"
+                        type="text"
+                        marginTopForm="20px"
                     />
+
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.name?.message}</Text>
 
                     <Input
                         id="email"
@@ -59,7 +98,10 @@ const FormRegisterUser = () => {
                         pt="15px"
                         pb="15px"
                         label="Email"
+                        marginTopForm="20px"
                     />
+
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.email?.message}</Text>
 
                     <Input
                         id="cpf"
@@ -71,10 +113,15 @@ const FormRegisterUser = () => {
                         borderColor="grey.6"
                         borderRadius="4px"
                         register={register}
+                        value={cpf}
+                        onChange={(event) => {formattedCpf(event.target.value)}}
                         pt="15px"
                         pb="15px"
                         label="CPF"
+                        marginTopForm="20px"
                     />
+
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.cpf?.message}</Text>
 
                     <Input
                         id="telephone"
@@ -86,10 +133,15 @@ const FormRegisterUser = () => {
                         borderColor="grey.6"
                         borderRadius="4px"
                         register={register}
+                        value={cellphoneNumber}
+                        onChange={(event) => {formattedMobileNumber(event.target.value)}}
                         pt="15px"
                         pb="15px"
-                        label="Celular"
+                        label="CPF"
+                        marginTopForm="20px"
                     />
+
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.telephone?.message}</Text>
 
                     <Input
                         id="birthdate"
@@ -104,9 +156,15 @@ const FormRegisterUser = () => {
                         pt="15px"
                         pb="15px"
                         label="Data de nascimento"
+                        type="text"
+                        value={birthdate}
+                        onChange={(event) => formattedBirthdate(event.target.value)}
+                        marginTopForm="20px"
                     />
+
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.birthdate?.message}</Text>
                     
-                    <FormControl mt={4}>
+                    <FormControl mt={5}>
                         <FormLabel fontSize="0.875rem">Descrição</FormLabel>
                         <Textarea 
                             placeholder="Digitar descrição"
@@ -120,11 +178,11 @@ const FormRegisterUser = () => {
                             resize="none"
                             _hover={{background: "grey.8", borderColor: "grey.8"}}
                             _focus={{background: "grey.10", border: "2px", borderColor: "brand.2"}}
-                            _focusVisible={{boxShadow: "none"}}   
+                            _focusVisible={{boxShadow: "none"}} 
                         />
                     </FormControl>
 
-                    <Box paddingTop="30px" paddingBottom="10px" >
+                    <Box paddingTop="30px" paddingBottom="10px" as="div">
                         <Heading as="h3" fontSize="1rem" fontWeight="500">Infomações de endereço</Heading>
                     </Box>
 
@@ -138,44 +196,55 @@ const FormRegisterUser = () => {
                         borderColor="grey.6"
                         borderRadius="4px"
                         register={register}
+                        value={cep}
+                        onChange={(event) => formattedZipcode(event.target.value)}
                         pt="15px"
                         pb="15px"
                         label="CEP"
+                        marginTopForm="20px"
                     />
 
-                    <Box display="flex" justifyContent="space-between">
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.zipcode?.message}</Text>
 
-                        <Input
-                            id="state"
-                            placeholder="Digitar Estado"
-                            color="grey.3"
-                            fontWeight="400"
-                            fontSize="0.875rem"
-                            border="1px"
-                            borderColor="grey.6"
-                            borderRadius="4px"
-                            register={register}
-                            pt="15px"
-                            pb="15px"
-                            label="Estado"
-                            formWidth="48%"
-                        />
+                    <Box display="flex" justifyContent="space-between" as="div">
+                        <Box width="48%">
+                            <Input
+                                id="state"
+                                placeholder="Digitar Estado"
+                                color="grey.3"
+                                fontWeight="400"
+                                fontSize="0.875rem"
+                                border="1px"
+                                borderColor="grey.6"
+                                borderRadius="4px"
+                                register={register}
+                                pt="15px"
+                                pb="15px"
+                                label="Estado"
+                                marginTopForm="20px"
+                            />
 
-                        <Input
-                            id="city"
-                            placeholder="Digitar cidade"
-                            color="grey.3"
-                            fontWeight="400"
-                            fontSize="0.875rem"
-                            border="1px"
-                            borderColor="grey.6"
-                            borderRadius="4px"
-                            register={register}
-                            pt="15px"
-                            pb="15px"
-                            label="Cidade"
-                            formWidth="48%"
-                        />
+                            <Text as="span" fontSize="0.7rem" color="alert.1">{errors.state?.message}</Text>
+                        </Box>
+                        <Box width="48%">
+                            <Input
+                                id="city"
+                                placeholder="Digitar cidade"
+                                color="grey.3"
+                                fontWeight="400"
+                                fontSize="0.875rem"
+                                border="1px"
+                                borderColor="grey.6"
+                                borderRadius="4px"
+                                register={register}
+                                pt="15px"
+                                pb="15px"
+                                label="Cidade"
+                                marginTopForm="20px"
+                            />
+
+                            <Text as="span" fontSize="0.7rem" color="alert.1">{errors.city?.message}</Text>
+                        </Box>
 
                     </Box>
 
@@ -192,43 +261,57 @@ const FormRegisterUser = () => {
                         pt="15px"
                         pb="15px"
                         label="Rua"
+                        marginTopForm="20px"
                     />
 
-                    <Box display="flex" justifyContent="space-between">
-                        <Input
-                            id="number"
-                            placeholder="Digitar número"
-                            color="grey.3"
-                            fontWeight="400"
-                            fontSize="0.875rem"
-                            border="1px"
-                            borderColor="grey.6"
-                            borderRadius="4px"
-                            register={register}
-                            pt="15px"
-                            pb="15px"
-                            label="Número"
-                        />
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.street?.message}</Text>
 
-                        <Input
-                            border="1px"
-                            register={register}
-                            id="complement"
-                            placeholder="Ex: apart 307"
-                            color="grey.3"
-                            fontWeight="400"
-                            fontSize="0.875rem"
-                            borderColor="grey.6"
-                            borderRadius="4px"
-                            pt="15px"
-                            pb="15px" 
-                            label="Complemento"  
-                        />
+                    <Box display="flex" justifyContent="space-between" as="div">
+                        <Box width="48%">
+                            <Input
+                                id="number"
+                                placeholder="Digitar número"
+                                color="grey.3"
+                                fontWeight="400"
+                                fontSize="0.875rem"
+                                border="1px"
+                                borderColor="grey.6"
+                                borderRadius="4px"
+                                register={register}
+                                pt="15px"
+                                pb="15px"
+                                label="Número"
+                                marginTopForm="20px"
+                            />
+
+                            <Text as="span" fontSize="0.7rem" color="alert.1">{errors.number?.message}</Text>
+
+                        </Box>
+                        <Box width="48%">
+                            <Input
+                                border="1px"
+                                register={register}
+                                id="complement"
+                                placeholder="Ex: apart 307"
+                                color="grey.3"
+                                fontWeight="400"
+                                fontSize="0.875rem"
+                                borderColor="grey.6"
+                                borderRadius="4px"
+                                pt="15px"
+                                pb="15px" 
+                                label="Complemento"
+                                marginTopForm="20px"
+                            />
+
+                            <Text as="span" fontSize="0.7rem" color="alert.1">{errors.complement?.message}</Text>
+                        </Box>
+
                     </Box>
-                    <Box paddingTop="35px" paddingBottom="20px" >
+                    <Box paddingTop="35px" paddingBottom="20px" as="div">
                         <Heading as="h3" fontSize="1rem" fontWeight="500">Tipo de conta</Heading>
                     </Box>
-                    <Box display="flex" justifyContent="space-between" mt={4}>
+                    <Box display="flex" justifyContent="space-between" mt={4} as="div">
                         <Button
                             color={isSaler ? "grey.0" : "grey.10"}
                             border="2px"
@@ -269,7 +352,12 @@ const FormRegisterUser = () => {
                         pb="15px" 
                         label="Senha"  
                         register={register}
+                        type="password"
+                        showPass
+                        marginTopForm="20px"
                     />
+
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.password?.message}</Text>
 
                     <Input
                         id="confir_password"
@@ -283,9 +371,14 @@ const FormRegisterUser = () => {
                         pb="15px" 
                         label="Confirmar Senha" 
                         register={register}
+                        type="password"
+                        showPass
+                        marginTopForm="20px"
                     />
+
+                    <Text as="span" fontSize="0.7rem" color="alert.1">{errors.confir_password?.message}</Text>
                     
-                    <Box width="100%" mt={7} paddingBottom="50px">
+                    <Box width="100%" mt={7} paddingBottom="50px" as="div">
                         <Button 
                             width="100%"
                             borderRadius="4px"
@@ -295,13 +388,16 @@ const FormRegisterUser = () => {
                             pt="23px"
                             pb="23px"
                             fontSize="0.9rem"
+                            type="submit"
                         >
                             Finalizar cadastro
                         </Button>
                     </Box>
+
                 </Box>
             </Box>
-        </Form>
+    
+        </FormRegister>
     )
 
 }
