@@ -46,8 +46,9 @@ interface iBrand{
 export const contextHomeProvider = createContext({} as iHomeContext);
 
 const HomePageContext = ({ children }: iChildren) => {
-
   const [carAd, setCarAd] = useState<iCar[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [filterCar, setFilterCar] = useState<iCar[]>([])
 
   const [brands, setBrands] = useState<iBrand[]>([])
@@ -61,15 +62,11 @@ const HomePageContext = ({ children }: iChildren) => {
   const [yearSelected, setYearSelected] = useState<string>("")
   const [modelSelected, setModelSelected] = useState<string>("")
   const [fuelSelected, setFuelSelected] = useState<string>("")
-  
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  
+   
   const GetCardsAd = async () => {
 
     try {
-
-      setIsLoading(true)
-
+      setIsLoading(true);
       const response = await instance.get("/car");
       
       setCarAd(response.data);
@@ -77,11 +74,8 @@ const HomePageContext = ({ children }: iChildren) => {
     } catch (error) {
       
       console.log(error);
-      
-    }finally{
-
-      setIsLoading(false)
-  
+    } finally {
+      setIsLoading(false);
     }
 
   };
@@ -280,7 +274,7 @@ const HomePageContext = ({ children }: iChildren) => {
         setYears,
         setModels,
         setFuels,
-        filterCarList
+        filterCarList,
       }}
     >
       {children}
