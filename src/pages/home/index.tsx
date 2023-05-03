@@ -25,8 +25,7 @@ export const Home = () => {
     filterCarList
   } = useContext(contextHomeProvider);
 
-  const pageLimit =
-    window.innerWidth == 1450 || window.innerWidth > 1450 ? 12 : 8;
+  const pageLimit = window.innerWidth == 1450 || window.innerWidth > 1450 ? 12 : 8;
   const pages = Math.ceil(carAd.length / pageLimit);
   const startSliceAt = currentPage * pageLimit;
   const endSliceAt = startSliceAt + pageLimit;

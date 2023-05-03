@@ -229,24 +229,7 @@ const FormRegisterUser = () => {
               Infomações de endereço
             </Heading>
           </Box>   
-          <FormControl mt={5}>
-              <FormLabel fontSize="0.875rem">Descrição</FormLabel>
-              <Textarea 
-                  placeholder="Digitar descrição"
-                  color="grey.3"
-                  fontWeight="400"
-                  fontSize="0.875rem"
-                  borderColor="grey.6"
-                  borderRadius="4px"
-                  pt="15px"
-                  pb="15px"
-                  resize="none"
-                  {...register("description")}
-                  _hover={{background: "grey.8", borderColor: "grey.8"}}
-                  _focus={{background: "grey.10", border: "2px", borderColor: "brand.2"}}
-                  _focusVisible={{boxShadow: "none"}} 
-              />
-          </FormControl>
+          
           <Input
             id="zipcode"
             placeholder="00000.000"

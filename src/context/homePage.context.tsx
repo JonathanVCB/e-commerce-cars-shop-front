@@ -62,11 +62,28 @@ const HomePageContext = ({ children }: iChildren) => {
   const [yearSelected, setYearSelected] = useState<string>("")
   const [modelSelected, setModelSelected] = useState<string>("")
   const [fuelSelected, setFuelSelected] = useState<string>("")
-   
+
+
+  // filterFieldsSelected,
+  //   setMaxKm,
+  //   setMinKm,
+  //   setMinPrice,
+  //   setMaxPrice,
+  //   FilterInputs,
+  //   minKm,
+  //   maxKm,
+  //   minPrice,
+  //   maxPrice,
+  //   setIsFilter,
+  //   setFilteredCar,
+  //   clearFilter
+  
   const GetCardsAd = async () => {
 
     try {
-      setIsLoading(true);
+
+      setIsLoading(true)
+
       const response = await instance.get("/car");
       
       setCarAd(response.data);
@@ -74,8 +91,11 @@ const HomePageContext = ({ children }: iChildren) => {
     } catch (error) {
       
       console.log(error);
-    } finally {
-      setIsLoading(false);
+      
+    }finally{
+
+      setIsLoading(false)
+  
     }
 
   };
