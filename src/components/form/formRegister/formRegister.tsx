@@ -13,12 +13,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { contextRegexInputs } from "../../../context/regexInputs.context";
 import schemaRegister from "../../../schemas/register.schema";
 import { useForm } from "react-hook-form";
-import { error } from "console";
 import { iRegister } from "../../../interface/user.interface";
 import { Input } from "../input";
 
 const FormRegisterUser = () => {
-  const [isSaler, setIsSaler] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [state, setState] = useState<string>("");
@@ -51,6 +49,7 @@ const FormRegisterUser = () => {
   });
 
   const onSubmitRegister = (data: iRegister) => {
+    
     const objUser = {
       name: data.name,
       email: data.email,
@@ -66,10 +65,9 @@ const FormRegisterUser = () => {
       number: data.number,
       complement: data.complement,
       description: data.description,
-      isSaler: isSaler
+      isSeller: isSeller
     };
 
-    console.log(objUser);
   };
 
   return (
@@ -379,28 +377,28 @@ const FormRegisterUser = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" mt={4} as="div">
             <Button
-              color={isSaler ? "grey.0" : "grey.10"}
+              color={isSeller ? "grey.0" : "grey.10"}
               border="2px"
-              borderColor={isSaler ? "grey.4" : "brand.1"}
-              bg={isSaler ? "grey.10" : "brand.1"}
+              borderColor={isSeller ? "grey.4" : "brand.1"}
+              bg={isSeller ? "grey.10" : "brand.1"}
               width="48%"
               borderRadius="4px"
               fontSize="0.875rem"
               _focus={{ backgroundColor: "brand.1" }}
-              onClick={() => setIsSaler(false)}
+              onClick={() => setIsSeller(false)}
             >
               Comprador
             </Button>
             <Button
-              color={!isSaler ? "grey.0" : "grey.10"}
+              color={!isSeller ? "grey.0" : "grey.10"}
               border="2px"
-              borderColor={!isSaler ? "grey.4" : "brand.1"}
-              bg={!isSaler ? "grey.10" : "brand.1"}
+              borderColor={!isSeller ? "grey.4" : "brand.1"}
+              bg={!isSeller ? "grey.10" : "brand.1"}
               width="48%"
               borderRadius="4px"
               fontSize="0.875rem"
               _focus={{ backgroundColor: "brand.1" }}
-              onClick={() => setIsSaler(true)}
+              onClick={() => setIsSeller(true)}
             >
               Anuciante
             </Button>

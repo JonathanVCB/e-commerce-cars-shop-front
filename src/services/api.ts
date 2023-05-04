@@ -11,8 +11,7 @@ const instanceKenzieCars = axios.create({
 });
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000/",
-  timeout: 5000,
+  baseURL: "https://motors-shop-m6-14.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
