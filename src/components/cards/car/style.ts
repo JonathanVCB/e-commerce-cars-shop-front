@@ -102,18 +102,4 @@ const LiCar = styled.li`
   }
 `;
 
-const ButtonStatus = styled.button`
-
-  display: block;
-  position: absolute;
-  top: 9px;
-  left: 15px;
-  background-color: var(--brand-1);
-  color: var(--whiteFixed);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 4px 8px 4px 8px;
-
-
-`
-export {LiCar, ButtonStatus}
+export {LiCar}
