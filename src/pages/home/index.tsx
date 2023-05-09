@@ -16,6 +16,7 @@ import { useState, useContext, useEffect } from "react";
 import { contextHomeProvider } from "../../context/homePage.context";
 import CardCardList from "./cardCarSection";
 import { useAuth } from "../../context/webContext";
+import { isInputElement } from "react-router-dom/dist/dom";
 
 export const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,9 +32,16 @@ export const Home = () => {
     carAd,
     GetCardsAd,
     filteredCars,
-    filterFieldsSelected,
+    filterOptionsMenu,
     filterCarList,
     isFilter,
+    inputCarsFiltered,
+    isInputFilter,
+    brandSelected,
+    modelSelected,
+    colorSelected,
+    yearSelected, 
+    fuelSelected,
   } = useContext(contextHomeProvider);
 
   const pageLimit =
@@ -52,36 +60,37 @@ export const Home = () => {
   const endSliceAt = startSliceAt + pageLimit;
 
   useEffect(() => {
-
     GetCardsAd();
-    filterFieldsSelected();
+    filterOptionsMenu();
     filterCarList();
-    pageCard()
+    pageCard();
     getAddressLogged();
-  }, []);
-
+  }, [
+    brandSelected,
+    modelSelected,
+    colorSelected,
+    yearSelected, 
+    fuelSelected
+  ]);
+  
   useEffect(() => {
-    pageCard()
+    pageCard();
     getAddressLogged();
-  }, [filteredCars])
+  }, [isFilter]);
 
   const pageCard = () => {
-    
     let cards: any = [];
-
-    if (filteredCars.length != 0 && isFilter) {
- 
+    
+    if (filteredCars.length != 0 && isFilter && !isInputFilter) {
       cards = filteredCars.slice(startSliceAt, endSliceAt);
-      
-    } else if (filteredCars.length == 0) {
-      
+    } else if ((isInputFilter && !isFilter) || isFilter) {
+      cards = inputCarsFiltered.slice(startSliceAt, endSliceAt);
+    } else if (!isFilter && !isInputFilter) {
       cards = carAd.slice(startSliceAt, endSliceAt);
-      
     }
 
     return cards;
-
-  }
+  };
 
   return (
     <ContainerHomePage>
