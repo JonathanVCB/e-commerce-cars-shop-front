@@ -64,7 +64,8 @@ const ModalFilterMobile = ({ isOpen, onClose }: iStatusModal) => {
     inputStatus,
     FilterInputs,
     filteredAlready, 
-    setFilteredAlready
+    setFilteredAlready,
+    filteredCars
   } = useContext(contextHomeProvider);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ const ModalFilterMobile = ({ isOpen, onClose }: iStatusModal) => {
     filterOptionsMenu();
     FilterInputs()
   }, [
+    isOpen,
     carAd,
     isFilter,
     isInputFilter,
@@ -191,6 +193,7 @@ const ModalFilterMobile = ({ isOpen, onClose }: iStatusModal) => {
                   color="grey.1"
                   focusBorderColor="grey.5"
                   type="number"
+                  value={minKm}
                   onChange={(event) => {
                     setMinKm(event.target.value);
                     inputStatus(event.target.value, minKm);
@@ -206,6 +209,7 @@ const ModalFilterMobile = ({ isOpen, onClose }: iStatusModal) => {
                   color="grey.1"
                   focusBorderColor="grey.5"
                   type="number"
+                  value={maxKm}
                   onChange={(event) => {
                     setMaxKm(event.target.value);
                     inputStatus(event.target.value, maxKm);
@@ -231,6 +235,7 @@ const ModalFilterMobile = ({ isOpen, onClose }: iStatusModal) => {
                   color="grey.1"
                   focusBorderColor="grey.5"
                   type="number"
+                  value={minPrice}
                   onChange={(event) => {
                     setMinPrice(event.target.value);
                     inputStatus(event.target.value, minPrice);
@@ -247,6 +252,7 @@ const ModalFilterMobile = ({ isOpen, onClose }: iStatusModal) => {
                   color="grey.1"
                   focusBorderColor="grey.5"
                   type="number"
+                  value={maxPrice}
                   onChange={(event) => {
                     setMaxPrice(event.target.value);
                     inputStatus(event.target.value, maxPrice);
@@ -265,6 +271,7 @@ const ModalFilterMobile = ({ isOpen, onClose }: iStatusModal) => {
               isOpen={isOpen}
               filteredAlready={filteredAlready}
               setFilteredAlready={setFilteredAlready}
+              filteredCars={filteredCars}
             />
 
           </DrawerBody>

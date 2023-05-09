@@ -62,7 +62,6 @@ export const BoxComment = () => {
               alt="Img do usuário"
               w={"32px"}
               h={"32px"}
-              borderRadius={"full"}
             />
             <Text
               as={"h3"}

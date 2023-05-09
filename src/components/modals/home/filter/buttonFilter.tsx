@@ -6,10 +6,14 @@ export const ButtonFilterMobile = ({
   onClose,
   isOpen,
   filteredAlready,
-  setFilteredAlready
+  setFilteredAlready,
+  filteredCars,
+  isInputFilter
 }: any) => {
 
-  if (isFilter && isOpen && filteredAlready) {
+  console.log(isInputFilter)
+
+  if (isFilter && isOpen && filteredAlready ) {
 
     return (
       <Box

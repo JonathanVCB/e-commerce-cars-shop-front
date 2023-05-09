@@ -609,6 +609,7 @@ const HomePageContext = ({ children }: iChildren) => {
 
   const clearFilter = () => {
     setIsFilter(false);
+    setIsInputFilter(false)
     setFilteredCar([]);
     setBrandSelected("");
     setModelSelected("");

@@ -373,7 +373,6 @@ export const DetailCard = () => {
                           src={comment.users.image_url}
                           alt="Imagem de perfil do usuário"
                           width="30px"
-                          borderRadius={"full"}
                         />
                         <Text
                           as={"h3"}
