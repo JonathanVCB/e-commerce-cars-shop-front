@@ -15,7 +15,7 @@ ambos podem também editar e excluir informações pessoais.
 
 * Para Rodar esse projeto localmente, será necessário seguir alguns passos:
 
-1. Clonar a API neste link: https://github.com/grupo14-m6/e-commerce-cars-shop-back.git
+1. Clonar a API neste link: https://github.com/JonathanVCB/e-commerce-cars-shop-back
 2. Configurar a API como indica a documentação no README da mesma.
 3. Clonar este repositório.
 
